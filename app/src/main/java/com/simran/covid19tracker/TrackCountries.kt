@@ -33,21 +33,18 @@ class TrackCountries : AppCompatActivity() {
     lateinit var txttotalDeathsC2: TextView
     lateinit var txttodayDeathsC2: TextView
     lateinit var txtaffectedCountriesC2: TextView
-    fun convertIntoInternationalForm( i: Int): String? {
-        var a: String? =null
-        if(i<1000){
-             return i.toString()
+    fun convertIntoInternationalForm(i: Int): String? {
+        var a: String? = null
+        if (i < 1000) {
+            return i.toString()
 
-        }
+        } else if (i >= 1000 && i <= 100000) {
+            val pass: Double = i.toDouble() / 1000;
+            a = pass.toString() + "k"
 
-        else if (i >= 1000 && i <= 100000) {
-            val pass:Double=i.toDouble()/1000;
-            a=pass.toString()+"k"
-
-        }
-        else if(i >= 1000000 ){
-            val pass:Double=i.toDouble()/1000;
-            a=pass.toString()+"M"
+        } else if (i >= 1000000) {
+            val pass: Double = i.toDouble() / 1000;
+            a = pass.toString() + "M"
 
         }
         return a;
@@ -88,36 +85,93 @@ class TrackCountries : AppCompatActivity() {
 
 //                    txtCasesc2.setText(jsonObject.getString("cases"))
 
-                    txtCasesc2.setText(convertIntoInternationalForm(jsonObject.getString("cases").toInt()))
-                    txtActiveC2.setText(convertIntoInternationalForm(jsonObject.getString("active").toInt()))
-                    txttodayDeathsC2.setText(convertIntoInternationalForm(jsonObject.getString("deaths").toInt()))
+                    txtCasesc2.setText(
+                        convertIntoInternationalForm(
+                            jsonObject.getString("cases").toInt()
+                        )
+                    )
+                    txtActiveC2.setText(
+                        convertIntoInternationalForm(
+                            jsonObject.getString("active").toInt()
+                        )
+                    )
+                    txttodayDeathsC2.setText(
+                        convertIntoInternationalForm(
+                            jsonObject.getString("deaths").toInt()
+                        )
+                    )
 //                   txtCriticalC2.setText(jsonObject.getString("critical"))
 
-                    txtCriticalC2.setText(convertIntoInternationalForm(jsonObject.getString("critical").toInt()))
-                    txtaffectedCountriesC2.setText(convertIntoInternationalForm(jsonObject.getString("affectedCountries").toInt()))
-                    txtRecoveredC2.setText(convertIntoInternationalForm(jsonObject.getString("recovered").toInt()))
-                    txttodayCasesC2.setText(convertIntoInternationalForm(jsonObject.getString("todayCases").toInt()))
-                    txttotalDeathsC2.setText(convertIntoInternationalForm(jsonObject.getString("deaths").toInt()))
+                    txtCriticalC2.setText(
+                        convertIntoInternationalForm(
+                            jsonObject.getString("critical").toInt()
+                        )
+                    )
+                    txtaffectedCountriesC2.setText(
+                        convertIntoInternationalForm(
+                            jsonObject.getString(
+                                "affectedCountries"
+                            ).toInt()
+                        )
+                    )
+                    txtRecoveredC2.setText(
+                        convertIntoInternationalForm(
+                            jsonObject.getString("recovered").toInt()
+                        )
+                    )
+                    txttodayCasesC2.setText(
+                        convertIntoInternationalForm(
+                            jsonObject.getString("todayCases").toInt()
+                        )
+                    )
+                    txttotalDeathsC2.setText(
+                        convertIntoInternationalForm(
+                            jsonObject.getString("deaths").toInt()
+                        )
+                    )
 
                     //piechart
-                    pieChart.addPieSlice(PieModel("cases", Integer.parseInt(txtCasesc2.text.toString()).toFloat(),Color.parseColor("#ff9900")))
-                    pieChart.addPieSlice(PieModel("recovered", Integer.parseInt(txtCasesc2.text.toString()).toFloat(),Color.parseColor("#33cc33")))
-                    pieChart.addPieSlice(PieModel("deaths", Integer.parseInt(txtCasesc2.text.toString()).toFloat(),Color.parseColor("#ff3333")))
-                    pieChart.addPieSlice(PieModel("active", Integer.parseInt(txtCasesc2.text.toString()).toFloat(),Color.parseColor("#4da6ff")))
+                    pieChart.addPieSlice(
+                        PieModel(
+                            "cases",
+                            Integer.parseInt(txtCasesc2.text.toString()).toFloat(),
+                            Color.parseColor("#ff9900")
+                        )
+                    )
+                    pieChart.addPieSlice(
+                        PieModel(
+                            "recovered",
+                            Integer.parseInt(txtCasesc2.text.toString()).toFloat(),
+                            Color.parseColor("#33cc33")
+                        )
+                    )
+                    pieChart.addPieSlice(
+                        PieModel(
+                            "deaths",
+                            Integer.parseInt(txtCasesc2.text.toString()).toFloat(),
+                            Color.parseColor("#ff3333")
+                        )
+                    )
+                    pieChart.addPieSlice(
+                        PieModel(
+                            "active",
+                            Integer.parseInt(txtCasesc2.text.toString()).toFloat(),
+                            Color.parseColor("#4da6ff")
+                        )
+                    )
                     arcLoader.stop()
-                    arcLoader.visibility=View.GONE
-                    scrollView.visibility=View.VISIBLE
+                    arcLoader.visibility = View.GONE
+                    scrollView.visibility = View.VISIBLE
                 } catch (e1: Exception) {
-
 
 
                 }
 
             }, {
 //                error listener
-                arcLoader.visibility=View.GONE
-                scrollView.visibility=View.VISIBLE
-                Toast.makeText(this,"Something went wrong", Toast.LENGTH_SHORT).show()
+                arcLoader.visibility = View.GONE
+                scrollView.visibility = View.VISIBLE
+                Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show()
             })
 
 
@@ -132,20 +186,3 @@ class TrackCountries : AppCompatActivity() {
 
 
 
-
-
-
-
-
-//
-//var arrayName: Array<Double> = arrayOf(txtCasesc2.text.toString().toDouble(),txtActiveC2.text.toString().toDouble(),txttodayDeathsC2.text.toString().toDouble(),txtCriticalC2.text.toString().toDouble(),
-//    txtaffectedCountriesC2.text.toString().toDouble(),txtRecoveredC2.text.toString().toDouble(),txttodayCasesC2.text.toString().toDouble(),txttotalDeathsC2.text.toString().toDouble())
-//val size=arrayName.size
-//for (i in 0 until size-1){
-//    if (arrayName[i]<=1000){
-//
-//
-//    }
-//
-//
-//}
